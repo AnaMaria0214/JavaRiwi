@@ -1,7 +1,6 @@
-import javax.swing.*;
 import java.util.Scanner;
 
-public class Main {
+public class Central {
     public static void main(String[] args) {
 
         //Instances
