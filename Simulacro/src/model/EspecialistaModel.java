@@ -57,15 +57,15 @@ public class EspecialistaModel implements CRUD {
         //2.Inicial la lista donde se guardaran los registros que devuelve la BD
         List<Object> ListaEspecialidades = new ArrayList<>();
 
-        try{
+        try {
             //3.Crear el sql
-            String sql= "SELECT * FROM especialidades ORDER BY especialidades.id ASC;";
+            String sql = "SELECT * FROM especialidades ORDER BY especialidades.id ASC;";
             //4.Preparar el statement
             PreparedStatement objPreparedStatement = (PreparedStatement) objConnection.prepareStatement(sql);
             //5.Ejecutamos el Query
-            ResultSet objResult =(ResultSet) objPreparedStatement.executeQuery();
+            ResultSet objResult = (ResultSet) objPreparedStatement.executeQuery();
             //6.Obtener resultados
-            while (objResult.next()){
+            while (objResult.next()) {
                 Especialidad objEspecialidad = new Especialidad();
 
                 objEspecialidad.setId(objResult.getInt("id"));
@@ -74,10 +74,10 @@ public class EspecialistaModel implements CRUD {
 
                 ListaEspecialidades.add(objEspecialidad);
             }
-        }catch ( SQLException e){
-            JOptionPane.showMessageDialog(null,"Error en los datos");
-
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error en los datos");
         }
+        return null;
     }
 
     @Override
