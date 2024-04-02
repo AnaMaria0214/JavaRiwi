@@ -1,14 +1,14 @@
 package entity;
 
-public class Especialidad {
+public class Medico {
     private int id;
     private String nombre;
     private String descripcion;
 
-    public Especialidad() {
+    public Medico() {
     }
 
-    public Especialidad(int id, String nombre, String descripcion) {
+    public Medico(int id, String nombre, String descripcion) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -40,7 +40,7 @@ public class Especialidad {
 
     @Override
     public String toString() {
-        return "Especialidad{" +
+        return "Medico{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", descripcion='" + descripcion + '\'' +

@@ -26,10 +26,10 @@ CREATE TABLE citas (
     id INT PRIMARY KEY AUTO_INCREMENT,
     id_pacientes INT NOT NULL,
     id_medicos INT NOT NULL,
-    CONSTRAINT fk_id_pacientes FOREIGN KEY (id_pacientes)
+    CONSTRAINT fk_id_paciente FOREIGN KEY (id_paciente)
         REFERENCES pacientes (id)
         ON DELETE CASCADE,
-    CONSTRAINT fk_id_medicos FOREIGN KEY (id_medicos)
+    CONSTRAINT fk_id_medico FOREIGN KEY (id_medico)
         REFERENCES medicos (id),
     fecha_cita DATE,
     hora_cita TIME,
