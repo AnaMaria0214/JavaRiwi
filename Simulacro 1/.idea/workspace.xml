@@ -5,25 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="15d463e4-e7cd-4287-88bd-402dd0e1cbe3" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SQLHOSPITAL.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Simulacro.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database/CRUD.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database/ConfigDB.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/Appointment.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/Patient.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/Physician.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/Specialty.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/AppointmentModel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/PatientModel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/PhysicianModel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/SpecialtyModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Simulacro 2/gestion aerolinea/gestion aerolinea.sql" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
