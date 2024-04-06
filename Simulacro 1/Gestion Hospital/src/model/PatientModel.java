@@ -3,7 +3,6 @@ package model;
 import database.CRUD;
 import database.ConfigDB;
 import entity.Patient;
-import entity.Specialty;
 
 import javax.swing.*;
 import java.sql.Connection;
@@ -26,7 +25,7 @@ public class PatientModel implements CRUD {
                 String sql = "INSERT INTO patients (name,last_Name,date_Birth,identity_Document) values (?,?,?,?);";
                 //4.Preparar el statement
                 PreparedStatement objPrepare = (PreparedStatement) objConnection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-                //5.Asignar los valores de ??
+                //5.Asignar los valores a las llaves
                 objPrepare.setString(1, objPatient.getName());
                 objPrepare.setString(2, objPatient.getLast_Name());
                 objPrepare.setDate(3, objPatient.getDate_Birth());
@@ -37,15 +36,16 @@ public class PatientModel implements CRUD {
 
                 //7.Obtener resultados
                 ResultSet objResult = objPrepare.getGeneratedKeys();
-
+                //Extraer el resultado de el ResultSet
                 while (objResult.next()) {
                     objPatient.setId_Patient(objResult.getInt(1));
                 }
                 //8.Cerrar el statement
                 objPrepare.close();
-                JOptionPane.showMessageDialog(null, "Specialty successfully added");
+                JOptionPane.showMessageDialog(null, "Patient successfully added");
             } catch (SQLException e) {
-                JOptionPane.showMessageDialog(null, "There was an error adding the Specialty");
+                JOptionPane.showMessageDialog(null, "There was an error adding the patient");
+                System.out.println("ERROR "+ e.getMessage());
             }
             //9.Cerrar la conexión
             ConfigDB.closeConnection();
@@ -78,7 +78,8 @@ public class PatientModel implements CRUD {
                 ListPatients.add(objPatient);
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "ERROR " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "ERROR ");
+            System.out.println("ERROR " + e.getMessage());
         }
         //7.Cerramos la conexión a la base de datos
         ConfigDB.closeConnection();
@@ -87,11 +88,65 @@ public class PatientModel implements CRUD {
 
     @Override
     public boolean update(Object object) {
-        return false;
+        //1.Abrir la conexión con la BD
+        Connection objConnection = ConfigDB.openConnection();
+        //2.Castear el objeto
+        Patient objPatient = (Patient) object;
+        //3.Crear una variable bandera para saber el estado de la actualización
+        boolean idUpdate = false;
+        try{
+            //4.Crear el sql
+            String sql = "UPDATE patients  name = ?,last_Name = ?,date_Birth = ?, identity_Document = ? WHERE patients.id_patients=?;";
+            //5.Preparar el statement
+            PreparedStatement objPrepare = (PreparedStatement) objConnection.prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
+            //6.Dar valores a las llaves
+            objPrepare.setString(1,objPatient.getName());
+            objPrepare.setString(2, objPatient.getLast_Name());
+            objPrepare.setDate(3,objPatient.getDate_Birth());
+            objPrepare.setInt(4,objPatient.getIdentity_Document());
+            //7.Ejecutar el query
+            int totalRowAffected = objPrepare.executeUpdate();
+            if(totalRowAffected>0){
+                idUpdate =true;
+                JOptionPane.showMessageDialog(null,"Patient information successfully updated ");
+            }
+        }catch (SQLException e){
+            JOptionPane.showMessageDialog(null,"ERROR updating information");
+            System.out.println("ERROR "+ e.getMessage());
+        }
+        //8.Cerrar la conexión a la base de datos
+        ConfigDB.closeConnection();
+        return idUpdate;
     }
+
 
     @Override
     public boolean delete(Object object) {
-        return false;
+        //1.Abrir la conexión con la BD
+        Connection objConnection = ConfigDB.openConnection();
+        //2.Castear el objeto
+        Patient objPatient = (Patient) object;
+        //3.Crear una variable bandera para saber el estado de la eliminaciòn
+        boolean isDeleted = false;
+
+        try {
+            //4.Crear el sql
+            String sql = "DELETE FROM patients WHERE id=?;";
+            //5.Preparar el statement
+            PreparedStatement objPrepare = objConnection.prepareStatement(sql);
+            objPrepare.setInt(1, objPatient.getId_Patient());
+            //6.Ejecutar el query
+            int totalAffectedRows = objPrepare.executeUpdate();
+            if (totalAffectedRows > 0) {
+                isDeleted = true;
+                JOptionPane.showMessageDialog(null, "Patient successfully removed");
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "ERROR when deleting the Patient ");
+            System.out.println("ERROR " + e.getMessage());
+        }
+        //7.Cerrar la conexión a la base de datos
+        ConfigDB.closeConnection();
+        return isDeleted;
     }
 }

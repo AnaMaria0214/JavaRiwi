@@ -5,7 +5,6 @@ import database.ConfigDB;
 import entity.Physician;
 import entity.Specialty;
 
-import javax.sql.rowset.CachedRowSet;
 import javax.swing.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -27,7 +26,7 @@ public class PhysicianModel implements CRUD {
             String sql = "INSERT INTO physicians (name,last_Name,Id_Specialty) values (?,?,?);";
             //4.Preparar el statement
             PreparedStatement objPrepare = (PreparedStatement) objConnection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-            //5.Asignar los valores de ??
+            //5.Asignar los valores a las llaves
             objPrepare.setString(1, objPhysician.getName());
             objPrepare.setString(2, objPhysician.getLast_name());
             objPrepare.setInt(3, objPhysician.getId_Specialty());
@@ -37,7 +36,7 @@ public class PhysicianModel implements CRUD {
 
             //7.Obtener resultados
             ResultSet objResult = objPrepare.getGeneratedKeys();
-
+            //Extraer el resultado de el ResultSet
             while (objResult.next()) {
                 objPhysician.setId_Physician(objResult.getInt(1));
             }
@@ -45,7 +44,8 @@ public class PhysicianModel implements CRUD {
             objPrepare.close();
             JOptionPane.showMessageDialog(null, "Physician successfully added");
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "There was an error adding the Physician"+ e.getMessage());
+            JOptionPane.showMessageDialog(null, "There was an error adding the Physician");
+            System.out.println("ERROR " + e.getMessage());
         }
         //9.Cerrar la conexión
         ConfigDB.closeConnection();
@@ -77,7 +77,8 @@ public class PhysicianModel implements CRUD {
                 ListPhysicians.add(objPhysician);
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "ERROR " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "ERROR ");
+            System.out.println("ERROR " + e.getMessage());
         }
         //7.Cerramos la conexión a la base de datos
         ConfigDB.closeConnection();
@@ -86,22 +87,64 @@ public class PhysicianModel implements CRUD {
 
     @Override
     public boolean update(Object object) {
+        //1.Abrir la conexión con la BD
         Connection objConnection = ConfigDB.openConnection();
-
+        //2.Castear el objeto
         Physician objPhysician = (Physician) object;
-        String sql="UPDATE physicians SET name=?,last_Name=?,Id_Specialty=? WHERE physicians.id_Physician=?;";
-        try{
-
-        }catch (SQLException e){
-            ConfigDB.closeConnection();
-            return objPhysician;
+        //3.Crear una variable bandera para saber el estado de la actualización
+        boolean idUpdate = false;
+        try {
+            //4.Crear el sql
+            String sql = "UPDATE physicians SET name=?,last_Name=?,Id_Specialty=? WHERE physicians.id_Physician=?;";
+            //5.Preparar el statement
+            PreparedStatement objPrepare = (PreparedStatement) objConnection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+            //6.Asignar los valores a las llaves
+            objPrepare.setString(1, objPhysician.getName());
+            objPrepare.setString(2, objPhysician.getLast_name());
+            objPrepare.setInt(2, objPhysician.getId_Specialty());
+            //7.Ejecutar el query
+            int totalRowAffected = objPrepare.executeUpdate();
+            if (totalRowAffected > 0) {
+                idUpdate = true;
+                JOptionPane.showMessageDialog(null, "Physician information successfully updated ");
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "ERROR updating information");
+            System.out.println("ERROR " + e.getMessage());
         }
-        return false;
+        //8.Cerrar la conexión a la base de datos
+        ConfigDB.closeConnection();
+        return idUpdate;
     }
 
     @Override
     public boolean delete(Object object) {
-        return false;
+        //1.Abrir la conexión con la BD
+        Connection objConnection = ConfigDB.openConnection();
+        //2.Castear el objeto
+        Physician objPhysician = (Physician) object;
+        //3.Crear una variable bandera para saber el estado de la eliminaciòn
+        boolean isDeleted = false;
+
+        try {
+            //4.Crear el sql
+            String sql = "DELETE FROM physicians WHERE id=?;";
+            //5.Preparar el statement
+            PreparedStatement objPrepare = objConnection.prepareStatement(sql);
+            objPrepare.setInt(1, objPhysician.getId_Physicians());
+            //6.Ejecutar el query
+            int totalAffectedRows = objPrepare.executeUpdate();
+            if (totalAffectedRows > 0) {
+                isDeleted = true;
+                JOptionPane.showMessageDialog(null, "Physician successfully removed");
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "ERROR when deleting the Physician ");
+            System.out.println("ERROR " + e.getMessage());
+        }
+        //7.Cerrar la conexión a la base de datos
+        ConfigDB.closeConnection();
+        return isDeleted;
     }
 }
 

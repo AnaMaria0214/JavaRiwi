@@ -1,12 +1,13 @@
 package entity;
 
 import java.sql.Date;
+import java.sql.Time;
 
 public class Appointment
 {
     private int id_Appointment;
     private Date date_Appointment;
-    private Date time_Appointment;
+    private Time time_Appointment;
     private String reason;
     private int id_Patient;
     private int id_Physician;
@@ -14,8 +15,7 @@ public class Appointment
     public Appointment() {
     }
 
-    public Appointment(int id_Appointment, Date date_Appointment, Date time_Appointment, String reason, int id_Patient, int id_Physician) {
-        this.id_Appointment = id_Appointment;
+    public Appointment( Date date_Appointment, Time time_Appointment, String reason, int id_Patient, int id_Physician) {
         this.date_Appointment = date_Appointment;
         this.time_Appointment = time_Appointment;
         this.reason = reason;
@@ -39,11 +39,11 @@ public class Appointment
         this.date_Appointment = date_Appointment;
     }
 
-    public Date getTime_Appointment() {
+    public Time getTime_Appointment() {
         return time_Appointment;
     }
 
-    public void setTime_Appointment(Date time_Appointment) {
+    public void setTime_Appointment(Time time_Appointment) {
         this.time_Appointment = time_Appointment;
     }
 

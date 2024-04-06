@@ -81,7 +81,7 @@ public class AirplanesModel implements CRUD {
 
     @Override
     public boolean update(Object object) {
-        //1..Abrir la conexión con la BD
+        //1.Abrir la conexión con la BD
         Connection objConnection = ConfigDB.openConnection();
         //2.Castear el objeto
         Airplane objAirplane = (Airplane) object;

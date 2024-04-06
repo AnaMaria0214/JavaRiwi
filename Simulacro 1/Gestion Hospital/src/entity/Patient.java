@@ -12,8 +12,7 @@ public class Patient {
     public Patient() {
     }
 
-    public Patient(int id_Patient, String name, String last_Name, Date date_Birth, int identity_Document) {
-        this.id_Patient = id_Patient;
+    public Patient( String name, String last_Name, Date date_Birth, int identity_Document) {
         this.name = name;
         this.last_Name = last_Name;
         this.date_Birth = date_Birth;

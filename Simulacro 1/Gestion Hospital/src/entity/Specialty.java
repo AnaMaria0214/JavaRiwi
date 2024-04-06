@@ -8,8 +8,7 @@ private String description;
     public Specialty() {
     }
 
-    public Specialty(int id_Specialty, String name, String description) {
-        this.id_Specialty = id_Specialty;
+    public Specialty(String name, String description) {
         this.name = name;
         this.description = description;
     }
@@ -18,7 +17,7 @@ private String description;
         return id_Specialty;
     }
 
-    public void setId(int id_Specialty) {
+    public void setId_Specialty(int id_Specialty) {
         this.id_Specialty = id_Specialty;
     }
 
