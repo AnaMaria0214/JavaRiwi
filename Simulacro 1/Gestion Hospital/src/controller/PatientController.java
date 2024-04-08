@@ -89,7 +89,7 @@ public class PatientController {
                         "Are you sure you want to update this Patient?");
                 if (confirm == 0) {
                     String name = JOptionPane.showInputDialog(null, "Enter the new name of the patient", selectedOption.getName());
-                    String last_Name = JOptionPane.showInputDialog(null, "Enter the new last names of the patient", selectedOption.getName());
+                    String last_Name = JOptionPane.showInputDialog(null, "Enter the new last names of the patient", selectedOption.getLast_Name());
                     Date date_Birth = Date.valueOf(JOptionPane.showInputDialog(null, "Enter the new date birth of the patient"));
                     String identity_Document  =JOptionPane.showInputDialog(null, "Enter the new identity document of the patient");
 

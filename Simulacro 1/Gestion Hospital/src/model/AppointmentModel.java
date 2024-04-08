@@ -99,7 +99,7 @@ public class AppointmentModel implements CRUD {
         boolean idUpdate = false;
         try{
             //4.Crear el sql
-            String sql = "UPDATE appointments  date_Appointment = ?,time_Appointment = ?,reason = ?, id_Patient = ?, id_Physician = ? WHERE appointments.id_appointments = ?;";
+            String sql = "UPDATE appointments SET date_Appointment = ?,time_Appointment = ?,reason = ?, id_Patient = ?, id_Physician = ? WHERE appointments.id_appointments = ?;";
             //5.Preparar el statement
             PreparedStatement objPrepare = (PreparedStatement) objConnection.prepareStatement(sql);
             //6.Dar valores a las llaves
