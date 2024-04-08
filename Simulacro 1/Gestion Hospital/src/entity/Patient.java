@@ -7,12 +7,12 @@ public class Patient {
     private String name;
     private String last_Name;
     private Date date_Birth;
-    private int identity_Document;
+    private String identity_Document;
 
     public Patient() {
     }
 
-    public Patient( String name, String last_Name, Date date_Birth, int identity_Document) {
+    public Patient( String name, String last_Name, Date date_Birth, String identity_Document) {
         this.name = name;
         this.last_Name = last_Name;
         this.date_Birth = date_Birth;
@@ -51,23 +51,22 @@ public class Patient {
         this.date_Birth = date_Birth;
     }
 
-    public int getIdentity_Document() {
+    public String getIdentity_Document() {
         return identity_Document;
     }
 
-    public void setIdentity_Document(int identity_Document) {
+    public void setIdentity_Document(String identity_Document) {
         this.identity_Document = identity_Document;
     }
 
     @Override
     public String toString() {
-        return "patient{" +
-                "id_Patient=" + id_Patient +
-                ", name='" + name + '\'' +
-                ", last_Name='" + last_Name + '\'' +
-                ", date_Birth=" + date_Birth +
-                ", identity_Document=" + identity_Document +
-                '}';
+        return
+                "  - PatientID: " + id_Patient +
+                "  Name: " + name +
+                "  Last Names: " + last_Name +
+                "  Date birth: " + date_Birth +
+                "  Identity document: " + identity_Document ;
     }
 }
 

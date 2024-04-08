@@ -62,7 +62,7 @@ public class AppointmentModel implements CRUD {
         List<Object> ListAppointments = new ArrayList<>();
         try {
             //3.Crear el sql
-            String sql = "SELECT * FROM appointments order BY appointments.id ASC;";
+            String sql = "SELECT * FROM appointments order BY appointments.id_Appointments ASC;";
             //4.Preparar el statement
             PreparedStatement objPreparedStatement = (PreparedStatement) objConnection.prepareStatement(sql);
             //5.Ejecutar el query y guardamos el resultado en ResultSet
@@ -71,7 +71,7 @@ public class AppointmentModel implements CRUD {
             while (objResult.next()) {
                 Appointment objAppointment = new Appointment();
 
-                objAppointment.setId_Appointment(objResult.getInt("id_Appointment"));
+                objAppointment.setId_Appointment(objResult.getInt("id_Appointments"));
                 objAppointment.setDate_Appointment(objResult.getDate("date_Appointment"));
                 objAppointment.setTime_Appointment(objResult.getTime("time_Appointment"));
                 objAppointment.setReason(objResult.getString("reason"));
@@ -101,7 +101,7 @@ public class AppointmentModel implements CRUD {
             //4.Crear el sql
             String sql = "UPDATE appointments  date_Appointment = ?,time_Appointment = ?,reason = ?, id_Patient = ?, id_Physician = ? WHERE appointments.id_appointments = ?;";
             //5.Preparar el statement
-            PreparedStatement objPrepare = (PreparedStatement) objConnection.prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
+            PreparedStatement objPrepare = (PreparedStatement) objConnection.prepareStatement(sql);
             //6.Dar valores a las llaves
             objPrepare.setDate(1,objAppointment.getDate_Appointment());
             objPrepare.setTime(2, objAppointment.getTime_Appointment());
@@ -134,7 +134,7 @@ public class AppointmentModel implements CRUD {
 
         try {
             //4.Crear el sql
-            String sql = "DELETE FROM appointments WHERE id=?;";
+            String sql = "DELETE FROM appointments WHERE id_Appointments = ?;";
             //5.Preparar el statement
             PreparedStatement objPrepare = objConnection.prepareStatement(sql);
             objPrepare.setInt(1, objAppointment.getId_Appointment());

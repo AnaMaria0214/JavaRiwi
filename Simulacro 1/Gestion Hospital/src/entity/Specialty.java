@@ -1,9 +1,9 @@
 package entity;
 
 public class Specialty {
-private int id_Specialty;
-private String name;
-private String description;
+    private int id_Specialty;
+    private String name;
+    private String description;
 
     public Specialty() {
     }
@@ -39,10 +39,9 @@ private String description;
 
     @Override
     public String toString() {
-        return "Specialty{" +
-                "id_Specialty=" + id_Specialty +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                '}';
+        return
+                "  - SpecialtyID: " + id_Specialty +
+                        "  Name: " + name +
+                        "  Description: " + description;
     }
 }

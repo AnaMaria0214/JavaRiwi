@@ -10,7 +10,7 @@ public class Physician {
     public Physician() {
     }
 
-    public Physician( String name, String last_name, int id_Specialty) {
+    public Physician(String name, String last_name, int id_Specialty) {
         this.name = name;
         this.last_name = last_name;
         this.id_Specialty = id_Specialty;
@@ -50,11 +50,10 @@ public class Physician {
 
     @Override
     public String toString() {
-        return "physician{" +
-                "id_Physician=" + id_Physician +
-                ", name='" + name + '\'' +
-                ", last_name='" + last_name + '\'' +
-                ", id_Specialty=" + id_Specialty +
-                '}';
+        return
+                "  - PhysicianID: " + id_Physician +
+                        "  Name:  " + name +
+                        "  Last names: " + last_name +
+                        "  SpecialtyID: " + id_Specialty;
     }
 }

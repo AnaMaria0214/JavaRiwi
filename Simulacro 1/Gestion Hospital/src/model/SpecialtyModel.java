@@ -45,7 +45,7 @@ public class SpecialtyModel implements CRUD {
             JOptionPane.showMessageDialog(null, "Specialty successfully added");
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "There was an error adding the Specialty");
-            System.out.println("ERROR "+ e.getMessage());
+            System.out.println("ERROR " + e.getMessage());
         }
         //9.Cerrar la conexión
         ConfigDB.closeConnection();
@@ -60,7 +60,7 @@ public class SpecialtyModel implements CRUD {
         List<Object> ListSpecialties = new ArrayList<>();
         try {
             //3.Crear el sql
-            String sql = "SELECT * FROM specialties order BY specialties.id ASC;";
+            String sql = "SELECT * FROM specialties order BY specialties.id_Specialties ASC;";
             //4.Preparar el statement
             PreparedStatement objPreparedStatement = (PreparedStatement) objConnection.prepareStatement(sql);
             //5.Ejecutar el query y guardar el resultado en ResultSet
@@ -93,23 +93,23 @@ public class SpecialtyModel implements CRUD {
         Specialty objSpecialty = (Specialty) object;
         //3.Crear una variable bandera para saber el estado de la actualización
         boolean idUpdate = false;
-        try{
+        try {
             //4.Crear el sql
             String sql = "UPDATE specialties SET name = ?, description = ? WHERE specialties.id_specialties = ?;";
             //5.Preparar el statement
-            PreparedStatement objPrepare = objConnection.prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
+            PreparedStatement objPrepare = objConnection.prepareStatement(sql);
             //6.Asignar los valores a las llaves
-            objPrepare.setString(1,objSpecialty.getName());
+            objPrepare.setString(1, objSpecialty.getName());
             objPrepare.setString(2, objSpecialty.getDescription());
             //7.Ejecutar el query
             int totalRowAffected = objPrepare.executeUpdate();
-            if(totalRowAffected>0){
-                idUpdate =true;
-                JOptionPane.showMessageDialog(null,"Specialty information successfully updated ");
+            if (totalRowAffected > 0) {
+                idUpdate = true;
+                JOptionPane.showMessageDialog(null, "Specialty information successfully updated ");
             }
-        }catch (SQLException e){
-            JOptionPane.showMessageDialog(null,"ERROR updating information");
-            System.out.println("ERROR "+ e.getMessage());
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "ERROR updating information");
+            System.out.println("ERROR " + e.getMessage());
         }
         //8.Cerrar la conexión a la base de datos
         ConfigDB.closeConnection();
@@ -127,7 +127,7 @@ public class SpecialtyModel implements CRUD {
 
         try {
             //4.Crear el sql
-            String sql = "DELETE FROM specialties WHERE id=?;";
+            String sql = "DELETE FROM specialties WHERE id_Specialties = ?;";
             //5.Preparar el statement
             PreparedStatement objPrepare = objConnection.prepareStatement(sql);
             objPrepare.setInt(1, objSpecialty.getId_Specialty());
@@ -135,7 +135,6 @@ public class SpecialtyModel implements CRUD {
             int totalAffectedRows = objPrepare.executeUpdate();
             if (totalAffectedRows > 0) {
                 isDeleted = true;
-                JOptionPane.showMessageDialog(null, "Specialty successfully removed");
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "ERROR when deleting the specialty ");

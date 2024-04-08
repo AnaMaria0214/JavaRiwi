@@ -23,7 +23,7 @@ public class PhysicianModel implements CRUD {
 
         try {
             //3.crear el sql
-            String sql = "INSERT INTO physicians (name,last_Name,Id_Specialty) values (?,?,?);";
+            String sql = "INSERT INTO physicians (name,last_Name,id_Specialty) values (?,?,?);";
             //4.Preparar el statement
             PreparedStatement objPrepare = (PreparedStatement) objConnection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             //5.Asignar los valores a las llaves
@@ -60,7 +60,7 @@ public class PhysicianModel implements CRUD {
         List<Object> ListPhysicians = new ArrayList<>();
         try {
             //3.Crear el sql
-            String sql = "SELECT * FROM physicians order BY physicians.id ASC;";
+            String sql = "SELECT * FROM physicians order BY physicians.id_Physicians ASC;";
             //4.Preparar el statement
             PreparedStatement objPreparedStatement = (PreparedStatement) objConnection.prepareStatement(sql);
             //5.Ejecutar el query y guardamos el resultado en ResultSet
@@ -69,7 +69,7 @@ public class PhysicianModel implements CRUD {
             while (objResult.next()) {
                 Physician objPhysician = new Physician();
 
-                objPhysician.setId_Physician(objResult.getInt("id_Physician"));
+                objPhysician.setId_Physician(objResult.getInt("id_Physicians"));
                 objPhysician.setName(objResult.getString("name"));
                 objPhysician.setLast_name(objResult.getString("last_name"));
                 objPhysician.setId_Specialty(objResult.getInt("id_Specialty"));
@@ -97,7 +97,7 @@ public class PhysicianModel implements CRUD {
             //4.Crear el sql
             String sql = "UPDATE physicians SET name=?,last_Name=?,Id_Specialty=? WHERE physicians.id_Physician=?;";
             //5.Preparar el statement
-            PreparedStatement objPrepare = (PreparedStatement) objConnection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+            PreparedStatement objPrepare = (PreparedStatement) objConnection.prepareStatement(sql);
             //6.Asignar los valores a las llaves
             objPrepare.setString(1, objPhysician.getName());
             objPrepare.setString(2, objPhysician.getLast_name());
@@ -128,7 +128,7 @@ public class PhysicianModel implements CRUD {
 
         try {
             //4.Crear el sql
-            String sql = "DELETE FROM physicians WHERE id=?;";
+            String sql = "DELETE FROM physicians WHERE id_Physicians=?;";
             //5.Preparar el statement
             PreparedStatement objPrepare = objConnection.prepareStatement(sql);
             objPrepare.setInt(1, objPhysician.getId_Physicians());
@@ -136,7 +136,6 @@ public class PhysicianModel implements CRUD {
             int totalAffectedRows = objPrepare.executeUpdate();
             if (totalAffectedRows > 0) {
                 isDeleted = true;
-                JOptionPane.showMessageDialog(null, "Physician successfully removed");
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "ERROR when deleting the Physician ");
