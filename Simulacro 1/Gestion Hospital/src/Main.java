@@ -57,6 +57,7 @@ public class Main {
                                 specialtyController.create();
                                 break;
                             case "3":
+                                specialtyController.update();
                                 break;
                             case "4":
                                 specialtyController.delete();
@@ -96,6 +97,7 @@ public class Main {
                                 physicianController.create();
                                 break;
                             case "3":
+                                physicianController.update();
                                 break;
                             case "4":
                                 physicianController.delete();
@@ -135,6 +137,7 @@ public class Main {
                                 patientController.create();
                                 break;
                             case "3":
+                                patientController.update();
                                 break;
                             case "4":
                                 patientController.delete();
@@ -174,6 +177,7 @@ public class Main {
                                 appointmentController.create();
                                 break;
                             case "3":
+                                appointmentController.update();
                                 break;
                             case "4":
                                 appointmentController.delete();

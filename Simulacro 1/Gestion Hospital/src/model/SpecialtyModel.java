@@ -101,11 +101,11 @@ public class SpecialtyModel implements CRUD {
             //6.Asignar los valores a las llaves
             objPrepare.setString(1, objSpecialty.getName());
             objPrepare.setString(2, objSpecialty.getDescription());
+            objPrepare.setInt(3,objSpecialty.getId_Specialty());
             //7.Ejecutar el query
             int totalRowAffected = objPrepare.executeUpdate();
             if (totalRowAffected > 0) {
                 idUpdate = true;
-                JOptionPane.showMessageDialog(null, "Specialty information successfully updated ");
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "ERROR updating information");

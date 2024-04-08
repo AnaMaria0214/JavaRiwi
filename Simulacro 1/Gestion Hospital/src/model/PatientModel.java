@@ -96,7 +96,7 @@ public class PatientModel implements CRUD {
         boolean idUpdate = false;
         try{
             //4.Crear el sql
-            String sql = "UPDATE patients  name = ?,last_Name = ?,date_Birth = ?, identity_Document = ? WHERE patients.id_patients=?;";
+            String sql = "UPDATE patients SET name = ?,last_Name = ?,date_Birth = ?, identity_Document = ? WHERE patients.id_patients=?;";
             //5.Preparar el statement
             PreparedStatement objPrepare = (PreparedStatement) objConnection.prepareStatement(sql);
             //6.Dar valores a las llaves
@@ -104,11 +104,12 @@ public class PatientModel implements CRUD {
             objPrepare.setString(2, objPatient.getLast_Name());
             objPrepare.setDate(3,objPatient.getDate_Birth());
             objPrepare.setString(4,objPatient.getIdentity_Document());
+            objPrepare.setInt(5,objPatient.getId_Patient());
+
             //7.Ejecutar el query
             int totalRowAffected = objPrepare.executeUpdate();
             if(totalRowAffected>0){
                 idUpdate =true;
-                JOptionPane.showMessageDialog(null,"Patient information successfully updated ");
             }
         }catch (SQLException e){
             JOptionPane.showMessageDialog(null,"ERROR updating information");

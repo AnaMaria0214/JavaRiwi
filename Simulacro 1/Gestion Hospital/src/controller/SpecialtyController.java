@@ -35,11 +35,10 @@ public class SpecialtyController {
         instanceModel().create(new Specialty(name, description));
     }
 
-    public void delete () {
-        StringBuilder List = getAll((instanceModel().findAll()));
+    public void delete() {
         Object[] options = instanceModel().findAll().toArray();
         if (options.length > 0) {
-            Specialty selectedOption = (Specialty)  JOptionPane.showInputDialog(
+            Specialty selectedOption = (Specialty) JOptionPane.showInputDialog(
                     null,
                     "Select the specialty that you want to delete:\n",
                     "Deleting a specialty",
@@ -68,6 +67,40 @@ public class SpecialtyController {
 
     }
 
+    public void update() {
+        Object[] options = instanceModel().findAll().toArray();
+        if (options.length > 0) {
+            Specialty selectedOption = (Specialty) JOptionPane.showInputDialog(
+                    null,
+                    "Select the specialty that you want to update:\n",
+                    "Updating a specialty",
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    options,
+                    options[0]);
+            if (selectedOption == null) {
+                JOptionPane.showMessageDialog(null, "No option selected");
+            } else {
+                int confirm = JOptionPane.showConfirmDialog(null,
+                        "Are you sure you want to update this specialty?");
+                if (confirm == 0) {
+                    String name = JOptionPane.showInputDialog(null, "Enter the new name of the specialty", selectedOption.getName());
+                    String description = JOptionPane.showInputDialog(null, "Enter the new description of the specialty");
+                    selectedOption.setName(name);
+                    selectedOption.setDescription(description);
+                    if (instanceModel().update(selectedOption)) {
+                        JOptionPane.showMessageDialog(null, "Specialty information successfully updated");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Couldn't update the Specialty:");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null,"data update cancelled");
+                }
+            }
+        }
+    }
 
 
 }
+
+

@@ -95,13 +95,14 @@ public class PhysicianModel implements CRUD {
         boolean idUpdate = false;
         try {
             //4.Crear el sql
-            String sql = "UPDATE physicians SET name=?,last_Name=?,Id_Specialty=? WHERE physicians.id_Physician=?;";
+            String sql = "UPDATE physicians SET name=?,last_Name=?,Id_Specialty=? WHERE physicians.id_Physicians=?;";
             //5.Preparar el statement
             PreparedStatement objPrepare = (PreparedStatement) objConnection.prepareStatement(sql);
             //6.Asignar los valores a las llaves
             objPrepare.setString(1, objPhysician.getName());
             objPrepare.setString(2, objPhysician.getLast_name());
-            objPrepare.setInt(2, objPhysician.getId_Specialty());
+            objPrepare.setInt(3, objPhysician.getId_Specialty());
+            objPrepare.setInt(4, objPhysician.getId_Physicians());
             //7.Ejecutar el query
             int totalRowAffected = objPrepare.executeUpdate();
             if (totalRowAffected > 0) {

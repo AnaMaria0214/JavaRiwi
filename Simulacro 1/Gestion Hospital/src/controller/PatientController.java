@@ -1,10 +1,7 @@
 package controller;
 
 import entity.Patient;
-import entity.Physician;
-import entity.Specialty;
 import model.PatientModel;
-import model.SpecialtyModel;
 
 import javax.swing.*;
 import java.sql.Date;
@@ -38,13 +35,12 @@ public class PatientController {
     public void create() {
         String name = JOptionPane.showInputDialog(null, "Enter the name of the new patient");
         String last_name = JOptionPane.showInputDialog(null, "Enter the last names of the new patient");
-        Date date_Birth = Date.valueOf(JOptionPane.showInputDialog(null, "Enter the date of birth of the new patient (yyyy-mm-dd)"));
+        Date date_Birth = Date.valueOf(JOptionPane.showInputDialog(null, "Enter the date of birth of the new patient (YYYY-MM-DD)"));
         String identity_Document = JOptionPane.showInputDialog(null, "Enter the identity document of the new patient (no spaces, dashes or commas)");
         instanceModel().create(new Patient(name, last_name, date_Birth, identity_Document));
     }
 
     public void delete() {
-        StringBuilder List = getAll((instanceModel().findAll()));
         Object[] options = instanceModel().findAll().toArray();
         if (options.length > 0) {
             Patient selectedOption = (Patient) JOptionPane.showInputDialog(
@@ -74,6 +70,43 @@ public class PatientController {
             JOptionPane.showMessageDialog(null, "There is no patient yet");
         }
 
+    }
+    public void update() {
+        Object[] options = instanceModel().findAll().toArray();
+        if (options.length > 0) {
+            Patient selectedOption = (Patient) JOptionPane.showInputDialog(
+                    null,
+                    "Select the Patient that you want to update:\n",
+                    "Updating a Patient",
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    options,
+                    options[0]);
+            if (selectedOption == null) {
+                JOptionPane.showMessageDialog(null, "No option selected");
+            } else {
+                int confirm = JOptionPane.showConfirmDialog(null,
+                        "Are you sure you want to update this Patient?");
+                if (confirm == 0) {
+                    String name = JOptionPane.showInputDialog(null, "Enter the new name of the patient", selectedOption.getName());
+                    String last_Name = JOptionPane.showInputDialog(null, "Enter the new last names of the patient", selectedOption.getName());
+                    Date date_Birth = Date.valueOf(JOptionPane.showInputDialog(null, "Enter the new date birth of the patient"));
+                    String identity_Document  =JOptionPane.showInputDialog(null, "Enter the new identity document of the patient");
+
+                    selectedOption.setName(name);
+                    selectedOption.setLast_Name(last_Name);
+                    selectedOption.setDate_Birth(date_Birth);
+                    selectedOption.setIdentity_Document(identity_Document);
+                    if (instanceModel().update(selectedOption)) {
+                        JOptionPane.showMessageDialog(null, "Patient information successfully updated");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Couldn't update the Specialty:");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null,"data update cancelled");
+                }
+            }
+        }
     }
 
 }

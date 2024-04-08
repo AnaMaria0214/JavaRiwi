@@ -108,6 +108,7 @@ public class AppointmentModel implements CRUD {
             objPrepare.setString(3,objAppointment.getReason());
             objPrepare.setInt(4,objAppointment.getId_Patient());
             objPrepare.setInt(5,objAppointment.getId_Physician());
+            objPrepare.setInt(6,objAppointment.getId_Appointment());
             //7.Ejecutar el query
             int totalRowAffected = objPrepare.executeUpdate();
             if(totalRowAffected>0){
@@ -142,7 +143,6 @@ public class AppointmentModel implements CRUD {
             int totalAffectedRows = objPrepare.executeUpdate();
             if (totalAffectedRows > 0) {
                 isDeleted = true;
-                JOptionPane.showMessageDialog(null, "Appointment successfully removed");
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "ERROR when deleting the Appointment");

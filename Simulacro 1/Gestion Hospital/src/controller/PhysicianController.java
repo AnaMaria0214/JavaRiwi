@@ -56,7 +56,6 @@ public class PhysicianController {
     }
 
     public void delete() {
-        StringBuilder List = getAll((instanceModel().findAll()));
         Object[] options = instanceModel().findAll().toArray();
         if (options.length > 0) {
             Physician selectedOption = (Physician) JOptionPane.showInputDialog(
@@ -84,6 +83,56 @@ public class PhysicianController {
             }
         } else {
             JOptionPane.showMessageDialog(null, "There is no physician yet");
+        }
+    }
+
+    public void update() {
+        Object[] options = instanceModel().findAll().toArray();
+        if (options.length > 0) {
+            Physician selectedOption = (Physician) JOptionPane.showInputDialog(
+                    null,
+                    "Select the physician that you want to update:\n",
+                    "Updating a physician",
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    options,
+                    options[0]);
+            if (selectedOption == null) {
+                JOptionPane.showMessageDialog(null, "No option selected");
+            } else {
+                int confirm = JOptionPane.showConfirmDialog(null,
+                        "Are you sure you want to update this physician?");
+                if (confirm == 0) {
+                    String name = JOptionPane.showInputDialog(null, "Enter the new name of the physician", selectedOption.getName());
+                    String last_name = JOptionPane.showInputDialog(null, "Enter the new last names of the physician", selectedOption.getLast_name());
+                    Object[] optionsID =  new SpecialtyModel().findAll().toArray();
+                    if (optionsID.length > 0) {
+                        Specialty selectedOptionID = (Specialty) JOptionPane.showInputDialog(
+                                null,
+                                "Select the new specialty for the physician:\n",
+                                "Updating the specialty",
+                                JOptionPane.QUESTION_MESSAGE,
+                                null,
+                                optionsID,
+                                optionsID[0]);
+                        if (selectedOptionID == null) {
+                            JOptionPane.showMessageDialog(null, "No option selected");
+                        } else {
+                            selectedOption.setName(name);
+                            selectedOption.setLast_name(last_name);
+                            selectedOption.setId_Specialty(selectedOptionID.getId_Specialty());
+
+                            if (instanceModel().update(selectedOption)) {
+                                JOptionPane.showMessageDialog(null, "Specialty Updated successfully");
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Couldn't update the Specialty:");
+                            }
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "data update cancelled");
+                    }
+                }
+            }
         }
     }
 }

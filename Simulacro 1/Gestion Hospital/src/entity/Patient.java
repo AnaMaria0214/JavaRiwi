@@ -64,7 +64,7 @@ public class Patient {
         return
                 "  - PatientID: " + id_Patient +
                 "  Name: " + name +
-                "  Last Names: " + last_Name +
+                "  Last names: " + last_Name +
                 "  Date birth: " + date_Birth +
                 "  Identity document: " + identity_Document ;
     }

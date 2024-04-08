@@ -3,8 +3,7 @@ package entity;
 import java.sql.Date;
 import java.sql.Time;
 
-public class Appointment
-{
+public class Appointment {
     private int id_Appointment;
     private Date date_Appointment;
     private Time time_Appointment;
@@ -15,7 +14,7 @@ public class Appointment
     public Appointment() {
     }
 
-    public Appointment( Date date_Appointment, Time time_Appointment, String reason, int id_Patient, int id_Physician) {
+    public Appointment(Date date_Appointment, Time time_Appointment, String reason, int id_Patient, int id_Physician) {
         this.date_Appointment = date_Appointment;
         this.time_Appointment = time_Appointment;
         this.reason = reason;
@@ -73,13 +72,12 @@ public class Appointment
 
     @Override
     public String toString() {
-        return "Appointment{" +
-                "id_Appointment=" + id_Appointment +
-                ", date_Appointment=" + date_Appointment +
-                ", time_Appointment=" + time_Appointment +
-                ", reason='" + reason + '\'' +
-                ", id_Patient=" + id_Patient +
-                ", id_Physician=" + id_Physician +
-                '}';
+        return
+                "  -AppointmentID: " + id_Appointment +
+                        " Date_Appointment: " + date_Appointment +
+                        " Time Appointment: " + time_Appointment +
+                        " Reason: " + reason +
+                        " PatientID: " + id_Patient +
+                        " PhysicianID: " + id_Physician;
     }
 }
