@@ -3,8 +3,8 @@ package entity;
 import java.sql.Date;
 
 public class Reservation {
-    private int id;
-    private Date departure_Date;
+    private int id_Reservations;
+    private Date reservation_Date;
     private String seat;
     private int id_Passenger;
     private int id_Flight;
@@ -12,28 +12,27 @@ public class Reservation {
     public Reservation() {
     }
 
-    public Reservation(int id, Date departure_Date, String seat, int id_Passenger, int id_Flight) {
-        this.id = id;
-        this.departure_Date = departure_Date;
+    public Reservation( Date reservation_Date, String seat, int id_Passenger, int id_Flight) {
+        this.reservation_Date = reservation_Date;
         this.seat = seat;
         this.id_Passenger = id_Passenger;
         this.id_Flight = id_Flight;
     }
 
-    public int getId() {
-        return id;
+    public int getId_Reservations() {
+        return id_Reservations;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId_Reservations(int id_Reservations) {
+        this.id_Reservations = id_Reservations;
     }
 
-    public Date getDeparture_Date() {
-        return departure_Date;
+    public Date getReservartion_Date() {
+        return reservation_Date;
     }
 
-    public void setDeparture_Date(Date departure_Date) {
-        this.departure_Date = departure_Date;
+    public void setReservation_Date(Date reservation_Date) {
+        this.reservation_Date = reservation_Date;
     }
 
     public String getSeat() {
@@ -62,12 +61,11 @@ public class Reservation {
 
     @Override
     public String toString() {
-        return "Reservation{" +
-                "id=" + id +
-                ", departure_Date=" + departure_Date +
-                ", seat='" + seat + '\'' +
-                ", id_Passenger=" + id_Passenger +
-                ", id_Flight=" + id_Flight +
-                '}';
+        return
+                "  - ReservationID: " + id_Reservations +
+                " Reservation date=" + reservation_Date +
+                " Seat: " + seat  +
+                " PassengerID:" + id_Passenger +
+                ", FlightID: " + id_Flight;
     }
 }

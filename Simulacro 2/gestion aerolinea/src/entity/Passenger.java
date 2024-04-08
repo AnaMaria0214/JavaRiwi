@@ -1,35 +1,34 @@
 package entity;
 
 public class Passenger {
-    private int id;
-    private String first_Name;
+    private int id_Passenger;
+    private String name;
     private String last_Name;
-    private int identification;
+    private String identification;
 
     public Passenger() {
     }
 
-    public Passenger(int id, String first_Name, String last_Name, int identification) {
-        this.id = id;
-        this.first_Name = first_Name;
+    public Passenger( String first_Name, String name, String identification) {
+        this.name = name;
         this.last_Name = last_Name;
         this.identification = identification;
     }
 
-    public int getId() {
-        return id;
+    public int getId_Passenger() {
+        return id_Passenger;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId_Passenger(int id_Passenger) {
+        this.id_Passenger = id_Passenger;
     }
 
-    public String getFirst_Name() {
-        return first_Name;
+    public String getName() {
+        return name;
     }
 
-    public void setFirst_Name(String First_Name) {
-        this.first_Name = first_Name;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getLast_Name() {
@@ -40,21 +39,20 @@ public class Passenger {
         this.last_Name = last_Name;
     }
 
-    public int getIdentification() {
+    public String getIdentification() {
         return identification;
     }
 
-    public void setIdentification(int identification) {
+    public void setIdentification(String identification) {
         this.identification = identification;
     }
 
     @Override
     public String toString() {
-        return "Passenger{" +
-                "id=" + id +
-                ", first_Name='" + first_Name + '\'' +
-                ", last_Name='" + last_Name + '\'' +
-                ", identification=" + identification +
-                '}';
+        return
+                "  - PassengerID: " + id_Passenger +
+                " First name: " + name +
+                " Last names: " + last_Name +
+                " Identification: " + identification;
     }
 }

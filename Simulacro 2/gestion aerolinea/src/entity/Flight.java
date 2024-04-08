@@ -4,7 +4,7 @@ import java.sql.Time;
 import java.sql.Date;
 
 public class Flight {
-    private int id;
+    private int id_Flights;
     private String destination;
     private Date departure_Date;
     private Time departure_Time;
@@ -13,20 +13,19 @@ public class Flight {
     public Flight() {
     }
 
-    public Flight(int id, String destination, Date departure_Date, Time departure_Time, int id_Airplane) {
-        this.id = id;
+    public Flight( String destination, Date departure_Date, Time departure_Time, int id_Airplane) {
         this.destination = destination;
         this.departure_Date = departure_Date;
         this.departure_Time = departure_Time;
         this.id_Airplane = id_Airplane;
     }
 
-    public int getId() {
-        return id;
+    public int getId_Flights() {
+        return id_Flights;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId_Flights(int id_Flights) {
+        this.id_Flights = id_Flights;
     }
 
     public String getDestination() {
@@ -63,13 +62,12 @@ public class Flight {
 
     @Override
     public String toString() {
-        return "Flight{" +
-                "id=" + id +
-                ", destination='" + destination + '\'' +
-                ", departure_Data=" + departure_Date +
-                ", departure_Time=" + departure_Time +
-                ", id_Airplane=" + id_Airplane +
-                '}';
+        return
+                "  - FlightID:" + id_Flights +
+                " Destination: " + destination +
+                " Departure_Data: " + departure_Date +
+                " Departure_Time: " + departure_Time +
+                " AirplaneID: " + id_Airplane ;
     }
 }
 

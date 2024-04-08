@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AirplanesModel implements CRUD {
+public class AirplaneModel implements CRUD {
     public Object create(Object object){
         //1.Abrir la conexión con la BD
         Connection objConnection = ConfigDB.openConnection();
@@ -23,7 +23,7 @@ public class AirplanesModel implements CRUD {
             //3.crear el sql
             String sql = "INSERT INTO airplanes (model,capacity) values (?,?);";
             //4.Preparar el statement
-            PreparedStatement objPrepare = (PreparedStatement) objConnection.prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
+            PreparedStatement objPrepare =  objConnection.prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
             //5.Asignar los valores de ??
             objPrepare.setString(1, objAirplane.getModel());
             objPrepare.setInt(2,objAirplane.getCapacity());
@@ -35,7 +35,7 @@ public class AirplanesModel implements CRUD {
             ResultSet objResult = objPrepare.getGeneratedKeys();
 
             while(objResult.next()){
-                objAirplane.setId(objResult.getInt(1));
+                objAirplane.setId_Airplane(objResult.getInt(1));
             }
             //8.Cerrar el statement
             objPrepare.close();
@@ -49,7 +49,7 @@ public class AirplanesModel implements CRUD {
         }
 
     @Override
-    public List<Object> read() {
+    public List<Object> findAll() {
         //1.Abrir la conexión con la BD
         Connection objConnection = ConfigDB.openConnection();
         //2.Iniciar la lista donde se van a guardar los registros
@@ -58,21 +58,22 @@ public class AirplanesModel implements CRUD {
             //3.Crear el sql
             String sql = "SELECT * FROM airplanes order BY airplanes.id ASC;";
             //4.Preparar el statement
-            PreparedStatement objPreparedStatement = (PreparedStatement) objConnection.prepareStatement(sql);
+            PreparedStatement objPreparedStatement = objConnection.prepareStatement(sql);
             //5.Ejecutar el query y guardamos el resultado en ResultSet
-            ResultSet objResult = (ResultSet) objPreparedStatement.executeQuery();
+            ResultSet objResult = objPreparedStatement.executeQuery();
             //6.Extraer el resultado de el ResultSet
             while (objResult.next()){
                 Airplane objAirPlane = new Airplane();
 
-                objAirPlane.setId(objResult.getInt("id"));
+                objAirPlane.setId_Airplane(objResult.getInt("id_Airplane"));
                 objAirPlane.setModel(objResult.getString("model"));
                 objAirPlane.setCapacity(objResult.getInt("capacity"));
 
                 ListAirplanes.add(objAirPlane);
             }
         }catch (SQLException e ){
-            JOptionPane.showMessageDialog(null,"ERROR " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "ERROR");
+            System.out.println("ERROR " + e.getMessage());
         }
         //7.Cerramos la conexión a la base de datos
         ConfigDB.closeConnection();
@@ -90,21 +91,22 @@ public class AirplanesModel implements CRUD {
 
         try{
             //4.Crear el sql
-            String sql = "INSERT INTO airplanes (id,model,capacity) VALUE (?,?,?)";
+            String sql = "UPDATE airplanes  SET model = ?, capacity =? WHERE airplanes.id_airplanes = ?;";
             //5.Preparar el statement
-            PreparedStatement objPrepare = (PreparedStatement) objConnection.prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
+            PreparedStatement objPrepare =  objConnection.prepareStatement(sql);
             //6.Dar valores a las llaves
-            objPrepare.setInt(1,objAirplane.getId());
-            objPrepare.setString(2, objAirplane.getModel());
-            objPrepare.setInt(3,objAirplane.getCapacity());
+            objPrepare.setString(1, objAirplane.getModel());
+            objPrepare.setInt(2,objAirplane.getCapacity());
+            objPrepare.setInt(3,objAirplane.getId_Airplane());
+
             //7.Ejecutar el query
-            int rowAffected = objPrepare.executeUpdate();
-            if(rowAffected>0){
-                idUpdate =true;
-                JOptionPane.showMessageDialog(null,"airplane information successfully updated ");
+            int totalRowAffected = objPrepare.executeUpdate();
+            if (totalRowAffected > 0) {
+                idUpdate = true;
             }
         }catch (SQLException e){
-            JOptionPane.showMessageDialog(null,"ERROR "+ e.getMessage());
+            JOptionPane.showMessageDialog(null, "ERROR updating information");
+            System.out.println("ERROR " + e.getMessage());
         }
         //8.Cerrar la conexión a la base de datos
         ConfigDB.closeConnection();
@@ -122,19 +124,19 @@ public class AirplanesModel implements CRUD {
 
         try{
             //4.Crear el sql
-            String sql = "DELETE FROM airplanes WHERE id=?;";
+            String sql = "DELETE FROM airplanes WHERE id_airplanes=?;";
             //5.Preparar el statement
-            PreparedStatement objPrepare = objConnection.prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
+            PreparedStatement objPrepare = objConnection.prepareStatement(sql);
             //6.Asignar los valores ?
-            objPrepare.setInt(1,objAirplane.getId());
+            objPrepare.setInt(1,objAirplane.getId_Airplane());
 
             int totalAffectedRows = objPrepare.executeUpdate();
             if (totalAffectedRows>0){
                 isDeleted=true;
-                JOptionPane.showMessageDialog(null,"Airplane successfully removed");
             }
         }catch (SQLException e){
-            JOptionPane.showMessageDialog(null,"ERROR "+e.getMessage());
+            JOptionPane.showMessageDialog(null, "ERROR when deleting the Airplane ");
+            System.out.println("ERROR " + e.getMessage());
         }
         return isDeleted;
     }

@@ -1,25 +1,24 @@
 package entity;
 
 public class Airplane {
-    private int id;
+    private int id_Airplane;
     private String model;
     private int capacity;
 
     public Airplane() {
     }
 
-    public Airplane(int id, String model, int capacity) {
-        this.id = id;
+    public Airplane(String model, int capacity) {
         this.model = model;
         this.capacity = capacity;
     }
 
-    public int getId() {
-        return id;
+    public int getId_Airplane() {
+        return id_Airplane;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId_Airplane(int id_Airplane) {
+        this.id_Airplane = id_Airplane;
     }
 
     public String getModel() {
@@ -40,10 +39,9 @@ public class Airplane {
 
     @Override
     public String toString() {
-        return "Airplane{" +
-                "id=" + id +
-                ", model='" + model + '\'' +
-                ", capacity=" + capacity +
-                '}';
+        return
+                "  - AirplaneID:" + id_Airplane +
+                " Model: " + model +
+                " Capacity: " + capacity ;
     }
 }
